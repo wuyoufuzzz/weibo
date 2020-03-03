@@ -9,10 +9,14 @@
 <body>
     
     <div class='container'>
-        @include('layouts._header') 
-        @include('shared._messages')
-        @yield('content')
-        @include('layouts._footer')
+        <div class="offset-md-1 col-md-10">
+            @include('layouts._header') 
+            @include('shared._messages')
+            @yield('content')
+            @include('layouts._footer')
+        </div>
     </div>
+
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

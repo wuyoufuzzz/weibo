@@ -10939,3 +10939,11 @@ section.user_info h1 {
   border-radius: 50%;
 }
 
+a.dropdown-item {
+  font-size: 0.8rem;
+}
+
+button.b-siz {
+  font-size: 0.8rem;
+}
+
