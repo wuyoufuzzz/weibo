@@ -10889,7 +10889,7 @@ body {
   font-weight: normal;
 }
 
-nav .navbar .navbar-expand-lg {
+nav.navbar {
   margin-bottom: 20px;
 }
 

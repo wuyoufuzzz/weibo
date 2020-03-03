@@ -26,14 +26,20 @@ class SessionController extends Controller
         // 验证数据是否存在数据库
         if (Auth::attempt($credentials)) {
             // 登录成功
-            session()->flash('success','欢迎回来！');
+            session()->flash('success', '欢迎回来！');
             return redirect()->route('users.show',[Auth::user()]);
         } else {
             // 登录失败
             session()->flash('danger', '很抱歉，您的邮箱或者是密码不正确');
             return redirect()->back()->withInput();
         }
+    }
 
-        return;
+    // 用户退出
+    public function destroy()
+    {
+        Auth::logout(); //用户退出
+        session()->flash('success', '您已成功退出!');
+        return redirect('login');
     }
 }
