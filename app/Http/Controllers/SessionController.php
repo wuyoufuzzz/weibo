@@ -5,23 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 
-class SessionController extends Controller {
+class SessionController extends Controller 
+{
     //登录表单
 
-    public function __construct() {
+    public function __construct() 
+    {
         // middleware中间件
         $this->middleware( 'guest', [
-            'only'=>['create', 'store']
+            'only'=>['create']
         ] );
     }
 
-    public function create () {
+    public function create () 
+    {
         return view( 'sessions.create' );
     }
 
     // 验证用户数据
 
-    public function store( Request $request ) {
+    public function store( Request $request ) 
+    {
         // 取得数据
         $credentials = $this->validate( $request, [
             'email' => 'required|email|max:255',
@@ -43,7 +47,8 @@ class SessionController extends Controller {
 
     // 用户退出
 
-    public function destroy() {
+    public function destroy() 
+    {
         Auth::logout();
         //用户退出
         session()->flash( 'success', '您已成功退出!' );

@@ -6,32 +6,37 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 
-class UserController extends Controller {
+class UserController extends Controller 
+{
     //用户操作
 
     // 构造函数
 
-    public function __construct() {
+    public function __construct() 
+    {
         // middleware中间件
         $this->middleware( 'auth', [
-            'except'=>['index', 'show', 'create', 'store']
+            'except'=>['create', 'store']
         ] );
         $this->middleware( 'guest', [
-            'only'=>['create', 'store']
+            'only'=>['store']
         ] );
     }
 
-    public function create() {
+    public function create() 
+    {
         // 用户
         return view( 'users.create' );
     }
 
-    public function show( User $user ) {
+    public function show( User $user ) 
+    {
         // 用户个人页面显示
         return view( 'users.show', compact( 'user' ) );
     }
 
-    public function store( Request $request ) {
+    public function store( Request $request ) 
+    {
         // 用户注册
         $this->validate( $request, [
             'name' => 'required|unique:users|max:50',
@@ -55,14 +60,16 @@ class UserController extends Controller {
 
     // 用户更新资料入口
 
-    public function edit( User $user ) {
+    public function edit( User $user ) 
+    {
         $this->authorize( 'update', $user );
         return view( 'users.edit', compact( 'user' ) );
     }
 
     // 提交更新个人资料入口
 
-    public function update( User $user, Request $request ) {
+    public function update( User $user, Request $request ) 
+    {
         $this->authorize( 'update', $user );
         // 获取提交的用户数据
         $this->validate( $request, [
@@ -83,8 +90,19 @@ class UserController extends Controller {
 
     // 用户列表
 
-    public function index() {
+    public function index() 
+    {
         $users = User::paginate( 10 );
         return view( 'users.index', compact( 'users' ) );
+    }
+
+    // 删除用户
+
+    public function destroy(User $user)
+    {
+        $this->authorize('destroy', $user);
+        $user->delete();
+        session()->flash('success', '删除成功！');
+        return back();
     }
 }
