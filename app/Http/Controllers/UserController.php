@@ -22,14 +22,17 @@ class UserController extends Controller {
     }
 
     public function create() {
+        // 用户
         return view( 'users.create' );
     }
 
     public function show( User $user ) {
+        // 用户个人页面显示
         return view( 'users.show', compact( 'user' ) );
     }
 
     public function store( Request $request ) {
+        // 用户注册
         $this->validate( $request, [
             'name' => 'required|unique:users|max:50',
             'email' => 'required|email|unique:users|max:255',
@@ -76,5 +79,12 @@ class UserController extends Controller {
         $user->update( $data );
         session()->flash( 'success', '更新成功！' );
         return redirect()->route( 'users.show', $user );
+    }
+
+    // 用户列表
+
+    public function index() {
+        $users = User::paginate( 10 );
+        return view( 'users.index', compact( 'users' ) );
     }
 }
