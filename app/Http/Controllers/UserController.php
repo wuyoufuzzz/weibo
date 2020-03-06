@@ -109,19 +109,19 @@ class UserController extends Controller
 
     // 邮箱发送
 
-    public function sendEmailConfirmationTo($user)
-    {
-        $view = 'emails.confirm';
-        $data = compact('user');
-        $from = 'zhucelehaojiu@gmail.com';
-        $name = 'Wuyoufu';
-        $to = $user->email;
-        $subject = '感谢注册Weibo应用！请确认你的邮箱。';
+    // public function sendEmailConfirmationTo($user)
+    // {
+    //     $view = 'emails.confirm';
+    //     $data = compact('user');
+    //     $from = 'zhucelehaojiu@gmail.com';
+    //     $name = 'Wuyoufu';
+    //     $to = $user->email;
+    //     $subject = '感谢注册Weibo应用！请确认你的邮箱。';
 
-        MAil::send($view, $data, function ($message) use ($from, $name, $to, $subject) {
-            $message->from($from, $name)->to($to)->subject($subject);
-        });
-    }
+    //     MAil::send($view, $data, function ($message) use ($from, $name, $to, $subject) {
+    //         $message->from($from, $name)->to($to)->subject($subject);
+    //     });
+    // }
 
 
     // 邮件激活
