@@ -37,7 +37,7 @@ class SessionController extends Controller
         if ( Auth::attempt( $credentials, $request->has( 'remember' ) ) ) {
             if (Auth::user()->activated){
                 // 登录成功
-                session()->flash( 'success', $user->name . '欢迎回来！' );
+                session()->flash( 'success',  '欢迎回来！' );
                 $fallback = route( 'users.show', Auth::user() );
                 return redirect()->intended( $fallback );
             } else {
