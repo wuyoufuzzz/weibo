@@ -33,7 +33,11 @@ class UserController extends Controller
     public function show( User $user ) 
     {
         // 用户个人页面显示
-        return view( 'users.show', compact( 'user' ) );
+
+        $statuses = $user->statuses()
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10);
+        return view( 'users.show', compact( 'user', 'statuses') );
     }
 
     public function store( Request $request ) 
