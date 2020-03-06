@@ -3,13 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class StaticPagesController extends Controller
 {
     //主页
     public function home()
     {
-        return view('static_pages/home');
+        // $feed_items = [];
+        // if(Auth::check()){
+        //     $feed_items = Auth::user()->feed()->paginate(30);
+        // }
+        $feed_items = [];
+        if (Auth::check()) {
+            $feed_items = Auth::user()->feed()->paginate(30);
+        }
+        return view('static_pages/home', compact('feed_items'));
     }
 
     // 帮助页
